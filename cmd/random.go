@@ -107,7 +107,7 @@ func getJokeData(baseAPI string) ([]byte, error) {
 		nil,
 	)
 	if err != nil {
-		fmt.Errorf("Could not request a datjoke - %v", err)
+		err = fmt.Errorf("Could not request a datjoke - %v", err)
 		return nil, err
 	}
 	request.Header.Add("Accept", "application/json")
@@ -115,13 +115,13 @@ func getJokeData(baseAPI string) ([]byte, error) {
 
 	response, err := http.DefaultClient.Do(request)
 	if err != nil {
-		fmt.Errorf("Could not complete dadjoke request - %v", err)
+		err = fmt.Errorf("Could not complete dadjoke request - %v", err)
 		return nil, err
 	}
 
 	responseBytes, err := io.ReadAll(response.Body)
 	if err != nil {
-		fmt.Errorf("Could not parse response body - %v", err)
+		err = fmt.Errorf("Could not parse response body - %v", err)
 		return nil, err
 	}
 
